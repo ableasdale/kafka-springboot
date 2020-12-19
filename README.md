@@ -22,7 +22,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic FirstTop
 
 Run the spring boot app
 ```
-TODO - currrently running in intellij
+gradle run
 ```
 
 send an HTTP POST to http://localhost:8080/api/kafka
