@@ -20,7 +20,7 @@ public class KafkaConfig {
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> config = new HashMap<>();
-        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaHelper.BOOTSTRAP_HOST);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class); //JsonSerializer.class
         return new DefaultKafkaProducerFactory<>(config);
@@ -28,18 +28,17 @@ public class KafkaConfig {
 
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
-        return new KafkaTemplate<String, String>(producerFactory());
+        return new KafkaTemplate<>(producerFactory());
     }
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
-        // TODO - params (helper)
-        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
+        config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaHelper.BOOTSTRAP_HOST);
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-// TODO - figure out how to set up ErrorHandlingDeserializer
+        // TODO - figure out how to set up ErrorHandlingDeserializer
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        config.put(ConsumerConfig.GROUP_ID_CONFIG, "default");
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, KafkaHelper.GROUP_CONFIG);
         return new DefaultKafkaConsumerFactory<>(config);
     }
 
