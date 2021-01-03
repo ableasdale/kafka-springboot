@@ -1,10 +1,8 @@
 package com.alexbleasdale.kafkademo;
 
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,31 +11,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.lang.invoke.MethodHandles;
-
+// , consumes = MediaType.TEXT_PLAIN
 @RestController
 @RequestMapping("/api/kafka")
 public class KafkaController {
 
-    private Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-    private KafkaTemplate<String, Model> kafkaTemplate;
+    private final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @Autowired
-    public KafkaController(KafkaTemplate<String, Model> kafkaTemplate){
+    public KafkaController(KafkaTemplate<String, String> kafkaTemplate){
         this.kafkaTemplate = kafkaTemplate;
     }
 
     @PostMapping
-    public void post(@RequestBody Model model){
-        kafkaTemplate.send("FirstTopic", model);
+    public void post(@RequestBody String string){
+        kafkaTemplate.send(KafkaHelper.TOPIC, string);
     }
 
-    @KafkaListener(topics = "FirstTopic")
-    public void getFromKafka(Model model){
-        LOG.info("I heard: " + model.toString());
+    @KafkaListener(topics = KafkaHelper.TOPIC)
+    public void getFromKafka(String string){
+        LOG.info("I heard: " + string);
     }
 
-    @Bean
-    public Gson jsonConverter(){
-        return new Gson();
-    }
+    //@Bean
+   // public Gson jsonConverter(){
+      //  return new Gson();
+  //  }
 }

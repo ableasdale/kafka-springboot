@@ -13,9 +13,13 @@ sourceCompatibility = '11'
 
 repositories {
     mavenCentral()
+
 }
 
 dependencies {
+    compile group: 'jakarta.xml.bind', name: 'jakarta.xml.bind-api', version: '3.0.0'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '3.0.0'
+    compile group: 'com.rometools', name: 'rome', version: '1.15.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.kafka:spring-kafka'
     implementation 'com.google.code.gson:gson:2.8.6'
