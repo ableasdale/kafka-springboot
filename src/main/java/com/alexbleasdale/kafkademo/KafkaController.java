@@ -71,11 +71,7 @@ public class KafkaController {
          from inside the Kafka Consumer?
          I'm using the MarkLogic Java Client API to handle the string data
          */
-        MarkLogicClient.writeXmlDocument(String.format("/%s.xml", java.util.UUID.randomUUID()), string);
+        MarkLogicClientProvider.writeXmlDocument(String.format("/%s.xml", java.util.UUID.randomUUID()), string);
     }
 
-    //@Bean
-    // public Gson jsonConverter(){
-    //  return new Gson();
-    //  }
 }

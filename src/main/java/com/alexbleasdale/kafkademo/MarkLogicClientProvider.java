@@ -3,7 +3,7 @@ package com.alexbleasdale.kafkademo;
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.DatabaseClientFactory;
 
-public class MarkLogicClient {
+public class MarkLogicClientProvider {
 
     //private static Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
@@ -19,6 +19,6 @@ public class MarkLogicClient {
     }
 
     public static void writeXmlDocument(String uri, String content) {
-        MarkLogicClient.getInstance().newXMLDocumentManager().writeAs(uri, content);
+        MarkLogicClientProvider.getInstance().newXMLDocumentManager().writeAs(uri, content);
     }
 }
