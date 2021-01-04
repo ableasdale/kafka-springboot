@@ -1,5 +1,6 @@
-## Quickstart
-Install Apache Kafka
+#Quickstart
+
+## Install Apache Kafka
 
 https://kafka.apache.org/downloads
 
@@ -9,41 +10,41 @@ bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
 Start Kafka
-
 ```
 bin/kafka-server-start.sh config/server.properties
 ```
 
 Monitor the test topic
-
 ```
-bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic FirstTopic
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic marklogic
 ```
 
-Run the spring boot app
+Run (this) spring boot app
 ```
 gradle run
 ```
 
-send an HTTP POST to http://localhost:8080/api/kafka
+## Testing connectivity
+
+Send an HTTP POST (with the `Content-Type` of `application/json`) to `http://localhost:8080/api/kafka/json`
  
-With the payload
+With some kind of JSON payload
 
 ```
 {
-	"firstname" : "alex",
-	"surname" : "bleasdale"
+	"hello" : "franz"
 }
 ```
 
 
-The topic listener will log
-
+The topic listener will log:
 ```
-2020-12-19 09:50:29.664  INFO 23000 --- [ntainer#0-0-C-1] c.a.kafkademo.KafkaController            : I heard: Model{firstname='alex', surname='bleasdale'}
+c.a.kafkademo.KafkaJsonController        : I heard: {
+	"hello" : "franz"
+}
 ```
 
-Setting up the Kafka MarkLogic Connector
+## Setting up the Kafka MarkLogic Connector
 
 1. Download (clone) the Kafka MarkLogic Connector
 
