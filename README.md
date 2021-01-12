@@ -1,5 +1,7 @@
 # Quickstart
 
+Below is a brief summary of all the steps taken in order to get up and running with this application.
+
 ## Install Apache Kafka
 
 https://kafka.apache.org/downloads
@@ -62,18 +64,18 @@ vim gradle-local.properties
 3. Copy over the necessary files
 
 ```
-cp kafka-connect-marklogic-1.5.0.jar /Users/ableasdale/Documents/workspace/kafka/kafka_2.13-2.6.0/libs/
+cp kafka-connect-marklogic-1.6.0.jar /Users/ableasdale/Documents/workspace/kafka/kafka_2.13-2.6.0/libs/
 cp config/marklogic-connect-standalone.properties /Users/ableasdale/Documents/workspace/kafka/kafka_2.13-2.6.0/config/
 cp config/marklogic-sink.properties /Users/ableasdale/Documents/workspace/kafka/kafka_2.13-2.6.0/config/
 ```
 
-4. (re)start Kafka(I think this is needed to ensure the MarkLogic connector is picked up?)
+4. (re)start Kafka (I believe this step is necessary in order to ensure the MarkLogic connector is picked up on restart)
 
 ```
 bin/kafka-server-start.sh config/server.properties
 ```
 
-5. Start the MarkLogic Kafka Connector
+5. Start the MarkLogic Kafka Connector (note this is being done from the Kafka directory)
 
 ```
  bin/connect-standalone.sh config/marklogic-connect-standalone.properties config/marklogic-sink.properties
