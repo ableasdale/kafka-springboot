@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,8 +29,9 @@ public class KafkaJsonController {
         this.jsonConverter = jsonConverter;
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void post(@RequestBody String string) {
+        LOG.info("!!!!! In the post method!");
         kafkaTemplate.send("marklogic", jsonConverter.toJson(string));
     }
 
@@ -37,5 +39,4 @@ public class KafkaJsonController {
     public void getJsonFromKafka(String string) {
         LOG.info("I heard: " + jsonConverter.fromJson(string, String.class));
     }
-
 }
