@@ -6,6 +6,6 @@ package com.alexbleasdale.kafkademo;
 public class KafkaHelper {
     public static final String BOOTSTRAP_HOST = "127.0.0.1:9092";
     public static final String GROUP_CONFIG = "default";
-    public static final String TOPIC = "marklogic2";
+    public static final String TOPIC = "marklogic-xml";
 }
 

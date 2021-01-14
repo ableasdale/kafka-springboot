@@ -1,6 +1,8 @@
 package com.alexbleasdale.kafkademo;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +23,23 @@ public class KafkaJsonController {
     private final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     private KafkaTemplate<String, String> kafkaTemplate;
-    private Gson jsonConverter;
+    //private Gson jsonConverter;
 
     @Autowired
-    public KafkaJsonController(KafkaTemplate<String, String> kafkaTemplate, Gson jsonConverter) {
+    public KafkaJsonController(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
-        this.jsonConverter = jsonConverter;
+        //this.jsonConverter = jsonConverter;
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void post(@RequestBody String string) {
         LOG.info("!!!!! In the post method!");
-        kafkaTemplate.send("marklogic", jsonConverter.toJson(string));
+        kafkaTemplate.send("marklogic", string);    // jsonConverter.toJson(string));
     }
 
+    /*
     @KafkaListener(topics = "marklogic")
     public void getJsonFromKafka(String string) {
         LOG.info("I heard: " + jsonConverter.fromJson(string, String.class));
-    }
+    } */
 }

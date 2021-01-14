@@ -21,7 +21,7 @@ import java.util.Map;
 public class KafkaJsonConfig {
 
     @Bean
-    public ProducerFactory<String, Model> jsonProducerFactory() {
+    public ProducerFactory<String, String> jsonProducerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaHelper.BOOTSTRAP_HOST);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -30,12 +30,13 @@ public class KafkaJsonConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, Model> kafkaJsonTemplate() {
-        return new KafkaTemplate<String, Model>(jsonProducerFactory());
+    public KafkaTemplate<String, String> kafkaJsonTemplate() {
+        return new KafkaTemplate<>(jsonProducerFactory());
     }
 
+    /*
     @Bean
-    public ConsumerFactory<String, Model> jsonConsumerFactory() {
+    public ConsumerFactory<String, String> jsonConsumerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaHelper.BOOTSTRAP_HOST);
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
@@ -46,11 +47,11 @@ public class KafkaJsonConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Model> kafkaJsonListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Model> concurrentKafkaListenerContainerFactory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaJsonListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> concurrentKafkaListenerContainerFactory = new ConcurrentKafkaListenerContainerFactory<>();
         concurrentKafkaListenerContainerFactory.setConsumerFactory(jsonConsumerFactory());
         return concurrentKafkaListenerContainerFactory;
-    }
+    } */
 
 
 }

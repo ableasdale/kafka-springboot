@@ -34,15 +34,16 @@ public class KafkaController {
         kafkaTemplate.send(KafkaHelper.TOPIC, string);
     }
 
+    /*
     @KafkaListener(topics = KafkaHelper.TOPIC)
     public void getFromKafka(String string) {
         LOG.info(String.format("Listener received payload from topic %s", KafkaHelper.TOPIC));
         LOG.debug(String.format("Full String from HTTP POST: %s", string));
 
-        /*
+        //
         First test: turn the POSTed String into a proper Java ROME object
         (to prove this can be marshalled into a usable Object at any stage in the process!)
-         */
+         //
 
         try {
             InputSource source = new InputSource(new StringReader(string));
@@ -61,17 +62,17 @@ public class KafkaController {
                     .build();
             HttpClient client = HttpClient.newHttpClient();
             HttpResponse<String> response = client.send(request2, HttpResponse.BodyHandlers.ofString());
-            LOG.info(response.toString()); */
+            LOG.info(response.toString());
         } catch (FeedException e) {
             LOG.error(String.format("Caught an exception: %s", e.getMessage()), e);
         }
 
-        /*
+        //
          Second test: can I write this string (as an XML document) to MarkLogic (as a simple test)
          from inside the Kafka Consumer?
          I'm using the MarkLogic Java Client API to handle the string data
-         */
+         //
         MarkLogicClientProvider.writeXmlDocument(String.format("/%s.xml", java.util.UUID.randomUUID()), string);
-    }
+    } */
 
 }

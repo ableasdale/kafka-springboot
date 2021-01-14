@@ -32,6 +32,7 @@ public class KafkaConfig {
         return new KafkaTemplate<>(producerFactory());
     }
 
+    /*
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
@@ -48,7 +49,7 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, String> concurrentKafkaListenerContainerFactory = new ConcurrentKafkaListenerContainerFactory<>();
         concurrentKafkaListenerContainerFactory.setConsumerFactory(consumerFactory());
         return concurrentKafkaListenerContainerFactory;
-    }
+    } */
 
     @Bean
     public Gson jsonConverter(){
