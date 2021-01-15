@@ -1,5 +1,3 @@
-package com.alexbleasdale.kafkademo;
-
 import com.marklogic.client.DatabaseClient;
 import com.marklogic.client.DatabaseClientFactory;
 
